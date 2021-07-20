@@ -1,11 +1,14 @@
-import React from 'react'
-import Video from './Video'
+import React from "react";
+
+import Video from "./Video";
 
 export default function VideoLists() {
-	return (
-		<div>
-			Video List
-			<Video/>
-		</div>
-	)
+
+
+  return (
+    <div className="video-list">
+      Video List
+	<Video/>
+    </div>
+  );
 }

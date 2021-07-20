@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.search {
+  max-width: 800px;
+  margin: auto;
+  padding-bottom: 2rem;
+}
+
+.search h2 {
+  padding-top: 2rem;
+}
+
+.video-list {
+  border: 2px solid #282c34;
+  max-width: 1200px;
+  min-height: 80vh;
+  margin: auto;
+}
