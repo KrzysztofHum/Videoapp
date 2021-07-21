@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { InputGroup, InputGroupAddon, Button, Input } from "reactstrap";
+import {
+  InputGroup,
+  InputGroupAddon,
+  Button,
+  Input,
+  Container,
+} from "reactstrap";
 import { addVideo } from "../actions/videoActions";
 
 export default function Search() {
@@ -18,8 +24,17 @@ export default function Search() {
       dispatch({ type: "VIDEO_ADD_FAIL" });
     }
   };
+  useEffect(() => {
+    getLocalVideos();
+  }, []);
+  
+  const getLocalVideos = () => {
+    if (localStorage.getItem("videos") === null) {
+      localStorage.setItem("videos", JSON.stringify([]));
+    }
+  };
   return (
-    <div className="search">
+    <Container>
       <h2>Wyszukiwarka filmów</h2>
       <h5>Wklej link z youtube:</h5>
       <InputGroup>
@@ -36,6 +51,6 @@ export default function Search() {
           </Button>
         </InputGroupAddon>
       </InputGroup>
-    </div>
+    </Container>
   );
 }

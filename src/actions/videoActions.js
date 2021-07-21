@@ -5,7 +5,7 @@ import {
   VIDEO_ADD_SUCCESS,
 } from "../constants/videoConstants";
 
-export const addVideo = (link) => async (dispatch) => {
+export const addVideo = (link) => async (dispatch, getState) => {
   dispatch({ type: VIDEO_ADD_REQUEST });
   try {
     const { data } = await axios.get(link);
