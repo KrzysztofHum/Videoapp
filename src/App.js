@@ -1,12 +1,13 @@
+import Search from "./components/Search";
 import "./App.css";
 import VideoLists from "./components/VideoLists";
-import Search from "./components/Search";
 
 function App() {
+
   return (
     <div className="App">
       <Search />
-      <VideoLists />
+      <VideoLists/>
     </div>
   );
 }
