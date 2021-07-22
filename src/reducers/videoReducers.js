@@ -12,7 +12,6 @@ export const videoReducer = (state = { videos: [] }, action) => {
       const old = JSON.parse(localStorage.getItem("videos"));
       old.push(action.payload);
       localStorage.setItem("videos", JSON.stringify(old));
-
       return { loading: false, videos: old };
     case VIDEO_ADD_FAIL:
       return {

@@ -4,10 +4,9 @@ import { videoReducer } from "./reducers/videoReducers";
 
 const initialState = {
   video: {
-    loading: localStorage.getItem("videos") ? "" : true,
     videos: localStorage.getItem("videos")
       ? JSON.parse(localStorage.getItem("videos"))
-      : null,
+      : [],
   },
 };
 
