@@ -8,7 +8,6 @@ import {
 export const addVideo = (link) => async (dispatch) => {
   dispatch({ type: VIDEO_ADD_REQUEST });
   try {
-    console.log(link);
     if (link.includes("vimeo")) {
       const token = process.env.REACT_APP_VIMEO_KEY;
       const { data } = await axios.get(link, {

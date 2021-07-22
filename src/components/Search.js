@@ -26,28 +26,6 @@ export default function Search() {
       dispatch(addVideo(youtubeApi));
     }
   };
-
-  // const idUrl = id.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/);
-  // const api = process.env.REACT_APP_API_KEY;
-  // const youtubeApi = `https://www.googleapis.com/youtube/v3/videos?id=${idUrl}&key=${api}&part=snippet,contentDetails,statistics,status`;
-
-  // const addVideoHandler = () => {
-  //   if (idUrl != null) {
-  //     dispatch(addVideo(youtubeApi));
-  //   } else {
-  //     dispatch({ type: "VIDEO_ADD_FAIL" });
-  //   }
-  // };
-
-  // const addVideoHandlera = () => {
-  //   const idUrlv = ida.match(/(videos|video|channels|\.com)\/([\d]+)/)[2];
-  //   const vimeoApi = `https://api.vimeo.com/videos/${idUrlv}`;
-  //   if (idUrlv != null) {
-  //     dispatch(addVideo1(vimeoApi));
-  //   } else {
-  //     dispatch({ type: "VIDEO_ADD_FAIL" });
-  //   }
-  // };
   useEffect(() => {
     getLocalVideos();
   }, []);
