@@ -1,13 +1,27 @@
 import React from "react";
-import { Card, CardBody, CardImg, CardText, CardTitle, Col } from "reactstrap";
+import { useDispatch } from "react-redux";
+import {
+  Card,
+  CardBody,
+  CardImg,
+  CardText,
+  CardTitle,
+  Col,
+  Button,
+} from "reactstrap";
+import { deleteVideo } from "../actions/videoActions";
 
 export default function Video(props) {
-  console.log(props.view);
+  const dispatch = useDispatch();
   const title = props.title;
   const likeCount = props.like;
   const img = props.img;
   const view = props.view;
-
+  const deleteVideoHandler = (id) => {
+    if (window.confirm("Na pewno chcesz usunąć film ?")) {
+      dispatch(deleteVideo(id));
+    }
+  };
   return (
     <Col sm="12" md="6" lg="4" xl="3">
       <Card>
@@ -18,6 +32,11 @@ export default function Video(props) {
           <CardText>Wyświetlenia: {view > -1 ? view : "Brak Danych"}</CardText>
           <CardText>Czas dodania: {new Date().toLocaleString() + ""}</CardText>
         </CardBody>
+        <Col className="d-flex justify-content-around">
+          <Button ml="5">Obejrzyj</Button>
+          <Button onClick={() => deleteVideoHandler(props.id)}>Usuń</Button>
+          <Button>Dodaj do ulubionych</Button>
+        </Col>
       </Card>
     </Col>
   );

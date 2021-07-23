@@ -20,9 +20,7 @@ export default function Search() {
 
   const vimeoVideo = () => {
     const idUrlv = id.match(/[^vimeo.com/]*$/);
-    console.log(idUrlv);
     const vimeoApi = `https://api.vimeo.com/videos/${idUrlv}`;
-    console.log(vimeoApi);
     dispatch(addVimeoVideo(vimeoApi));
     setId("");
   };

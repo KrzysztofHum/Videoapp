@@ -2,6 +2,7 @@ import {
   VIDEO_ADD_FAIL,
   VIDEO_ADD_REQUEST,
   VIDEO_ADD_SUCCESS,
+  VIDEO_DELETE,
 } from "../constants/videoConstants";
 
 export const videoReducer = (state = { videos: [] }, action) => {
@@ -18,6 +19,12 @@ export const videoReducer = (state = { videos: [] }, action) => {
         loading: false,
         error: action.payload || "Taki film nie istnieje",
       };
+    case VIDEO_DELETE:
+      return {
+        ...state,
+        videos: state.videos.filter((video) => video.id !== action.payload),
+      };
+      
     default:
       return state;
   }

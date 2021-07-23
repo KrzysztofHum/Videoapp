@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import Video from "./Video";
-import { v4 as uuidv4 } from "uuid";
 import { Container, Row } from "reactstrap";
 
 export default function VideoLists() {
@@ -17,16 +16,17 @@ export default function VideoLists() {
         <Row>
           {videos.map((video) => (
             <Video
-              key={uuidv4()}
-              title={video.name ?? video.items[0].snippet.localized.title}
+              key={video.id}
+              id={video.id}
+              title={video.name ?? video.snippet.localized.title}
               like={
                 video.metadata?.connections?.likes?.total ??
-                video.items[0].statistics.likeCount
+                video.statistics.likeCount
               }
-              view={video.pictures ?? video.items[0].statistics.viewCount}
+              view={video.pictures ?? video.statistics.viewCount}
               img={
                 video.pictures?.sizes[2]?.link ??
-                video.items[0].snippet.thumbnails.default.url
+                video.snippet.thumbnails.default.url
               }
             ></Video>
           ))}
