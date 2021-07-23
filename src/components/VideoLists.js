@@ -6,7 +6,6 @@ import { Container, Row } from "reactstrap";
 export default function VideoLists() {
   const video = useSelector((state) => state.video);
   const { loading, error, videos } = video;
-  console.log(videos);
 
   return (
     <Container className="mt-5">
