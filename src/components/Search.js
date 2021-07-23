@@ -14,17 +14,19 @@ export default function Search() {
   const [id, setId] = useState("");
 
   const addVideoHandler = () => {
-    if (id.includes("vimeo.com")) return vimeoVideo();
+    if (id.includes("vimeo.com/")) return vimeoVideo();
     return youtubeVideo();
   };
 
   const vimeoVideo = () => {
-    const idUrlv = id.match(/(videos|video|channels|\.com)\/([\d]+)/)[2];
+    const idUrlv = id.match(/[^vimeo.com/]*$/);
+    console.log(idUrlv);
     const vimeoApi = `https://api.vimeo.com/videos/${idUrlv}`;
     console.log(vimeoApi);
     dispatch(addVimeoVideo(vimeoApi));
     setId("");
   };
+
   const youtubeVideo = () => {
     const idUrl = id.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/);
     const api = process.env.REACT_APP_API_KEY;
