@@ -29,7 +29,6 @@ export const addYoutubeVideo = (link) => async (dispatch) => {
   dispatch({ type: VIDEO_ADD_REQUEST });
   try {
     const { data } = await axios.get(link);
-    console.log(data.items[0]);
     if (data.items.toString().length > 1)
       return dispatch({
         type: VIDEO_ADD_SUCCESS,
