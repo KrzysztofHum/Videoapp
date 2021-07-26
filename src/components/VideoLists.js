@@ -1,6 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import Video from "./Video";
-import { Button, Container, Dropdown, DropdownMenu, DropdownToggle, Row } from "reactstrap";
+import {
+  Button,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  UncontrolledDropdown,
+} from "reactstrap";
 import Paginations from "./Paginations";
 import { ALL_VIDEO_DELETE } from "../constants/videoConstants";
 
@@ -16,9 +24,24 @@ export default function VideoLists() {
   };
   return (
     <Container className="mt-5">
-      <Paginations />
       <Button onClick={() => deleteAllVideoHandler()}>Usuń Wszystko</Button>
-
+      <UncontrolledDropdown>
+        <DropdownToggle caret>Filtruj</DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem>Wszystkie</DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>Tylko ulubione</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown>
+        <DropdownToggle caret>Sortuj</DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem>Najstarsze</DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>Ostatnio dodane</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <Paginations />
       {loading ? (
         <div>Ładowanie</div>
       ) : error ? (
@@ -39,6 +62,7 @@ export default function VideoLists() {
                 video.pictures?.sizes[2]?.link ??
                 video.snippet.thumbnails.default.url
               }
+              favorite={video.favorite}
             ></Video>
           ))}
         </Row>

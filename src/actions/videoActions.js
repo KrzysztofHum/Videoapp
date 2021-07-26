@@ -1,6 +1,7 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import {
+  ADD_VIDEO_TO_FAVORITE,
   VIDEO_ADD_FAIL,
   VIDEO_ADD_REQUEST,
   VIDEO_ADD_SUCCESS,
@@ -18,7 +19,7 @@ export const addVimeoVideo = (link) => async (dispatch) => {
     });
     dispatch({
       type: VIDEO_ADD_SUCCESS,
-      payload: { ...data, id: uuidv4() },
+      payload: { ...data, id: uuidv4(), favorite: "no" },
     });
   } catch (error) {
     dispatch({ type: VIDEO_ADD_FAIL, payload: error.message });
@@ -32,7 +33,7 @@ export const addYoutubeVideo = (link) => async (dispatch) => {
     if (data.items.toString().length > 1)
       return dispatch({
         type: VIDEO_ADD_SUCCESS,
-        payload: { ...data.items[0], id: uuidv4() },
+        payload: { ...data.items[0], id: uuidv4(), favorite: "no" },
       });
     return dispatch({ type: VIDEO_ADD_FAIL });
   } catch (error) {
@@ -42,4 +43,8 @@ export const addYoutubeVideo = (link) => async (dispatch) => {
 
 export const deleteVideo = (id) => (dispatch) => {
   dispatch({ type: VIDEO_DELETE, payload: id });
+};
+
+export const addVideoToFavorite = (id) => (dispatch) => {
+  dispatch({ type: ADD_VIDEO_TO_FAVORITE, payload: id });
 };

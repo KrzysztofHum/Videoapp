@@ -9,7 +9,7 @@ import {
   Col,
   Button,
 } from "reactstrap";
-import { deleteVideo } from "../actions/videoActions";
+import { addVideoToFavorite, deleteVideo } from "../actions/videoActions";
 
 export default function Video(props) {
   const dispatch = useDispatch();
@@ -21,6 +21,9 @@ export default function Video(props) {
     if (window.confirm("Na pewno chcesz usunąć film ?")) {
       dispatch(deleteVideo(id));
     }
+  };
+  const addVideoToFavoriteHandler = (id) => {
+    dispatch(addVideoToFavorite(id));
   };
   return (
     <Col sm="12" md="6" lg="4" xl="3">
@@ -35,7 +38,9 @@ export default function Video(props) {
         <Col className="d-flex justify-content-around">
           <Button ml="5">Obejrzyj</Button>
           <Button onClick={() => deleteVideoHandler(props.id)}>Usuń</Button>
-          <Button>Dodaj do ulubionych</Button>
+          <Button onClick={() => addVideoToFavoriteHandler(props.id)}>
+            Dodaj do ulubionych
+          </Button>
         </Col>
       </Card>
     </Col>

@@ -1,4 +1,5 @@
 import {
+  ADD_VIDEO_TO_FAVORITE,
   ALL_VIDEO_DELETE,
   VIDEO_ADD_FAIL,
   VIDEO_ADD_REQUEST,
@@ -35,6 +36,23 @@ export const videoReducer = (state = { videos: [] }, action) => {
       return {
         videos: [],
       };
+    case ADD_VIDEO_TO_FAVORITE:
+      const findVideo = {
+        ...state,
+        videos: state.videos.filter((video) => video.id === action.payload),
+      };
+      const otherVideos = {
+        ...state,
+        videos: state.videos.filter((video) => video.id !== action.payload),
+      };
+      const favoriteVideo = { ...findVideo.videos[0], favorite: "yes" };
+      const videos = [...otherVideos.videos, favoriteVideo];
+      console.log(videos);
+      console.log(state);
+      console.log(otherVideos);
+      console.log(favoriteVideo);
+      localStorage.setItem("videos", JSON.stringify(videos));
+      return state;
 
     default:
       return state;
