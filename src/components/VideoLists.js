@@ -1,13 +1,24 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Video from "./Video";
-import { Container, Row } from "reactstrap";
+import { Button, Container, Dropdown, DropdownMenu, DropdownToggle, Row } from "reactstrap";
+import Paginations from "./Paginations";
+import { ALL_VIDEO_DELETE } from "../constants/videoConstants";
 
 export default function VideoLists() {
+  const dispatch = useDispatch();
   const video = useSelector((state) => state.video);
   const { loading, error, videos } = video;
 
+  const deleteAllVideoHandler = () => {
+    if (window.confirm("Na pewno chcesz usunąć wszystkie filmy ?")) {
+      dispatch({ type: ALL_VIDEO_DELETE });
+    }
+  };
   return (
     <Container className="mt-5">
+      <Paginations />
+      <Button onClick={() => deleteAllVideoHandler()}>Usuń Wszystko</Button>
+
       {loading ? (
         <div>Ładowanie</div>
       ) : error ? (

@@ -1,4 +1,5 @@
 import {
+  ALL_VIDEO_DELETE,
   VIDEO_ADD_FAIL,
   VIDEO_ADD_REQUEST,
   VIDEO_ADD_SUCCESS,
@@ -28,6 +29,11 @@ export const videoReducer = (state = { videos: [] }, action) => {
       return {
         ...state,
         videos: state.videos.filter((video) => video.id !== action.payload),
+      };
+    case ALL_VIDEO_DELETE:
+      localStorage.setItem("videos", JSON.stringify([]));
+      return {
+        videos: [],
       };
 
     default:
