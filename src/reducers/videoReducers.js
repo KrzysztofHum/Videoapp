@@ -20,11 +20,16 @@ export const videoReducer = (state = { videos: [] }, action) => {
         error: action.payload || "Taki film nie istnieje",
       };
     case VIDEO_DELETE:
+      const newVideos = {
+        ...state,
+        videos: state.videos.filter((video) => video.id !== action.payload),
+      };
+      localStorage.setItem("videos", JSON.stringify(newVideos.videos));
       return {
         ...state,
         videos: state.videos.filter((video) => video.id !== action.payload),
       };
-      
+
     default:
       return state;
   }
