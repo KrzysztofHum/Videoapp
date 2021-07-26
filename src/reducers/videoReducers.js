@@ -2,6 +2,7 @@ import {
   ADD_VIDEO_TO_FAVORITE,
   ALL_VIDEO_DELETE,
   FILTER_VIDEO,
+  FILTER_VIDEO_ALL,
   VIDEO_ADD_FAIL,
   VIDEO_ADD_REQUEST,
   VIDEO_ADD_SUCCESS,
@@ -57,6 +58,9 @@ export const videoReducer = (state = { videos: [] }, action) => {
         videos: allFavoriteVideos.filter((video) => video.favorite === "yes"),
       };
       return filter;
+    case FILTER_VIDEO_ALL:
+      let allVideos = JSON.parse(localStorage.getItem("videos"));
+      return { videos: allVideos };
     default:
       return state;
   }

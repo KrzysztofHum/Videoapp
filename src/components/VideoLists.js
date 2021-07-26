@@ -10,7 +10,7 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 import Paginations from "./Paginations";
-import { ALL_VIDEO_DELETE, FILTER_VIDEO } from "../constants/videoConstants";
+import { ALL_VIDEO_DELETE, FILTER_VIDEO, FILTER_VIDEO_ALL } from "../constants/videoConstants";
 
 export default function VideoLists() {
   const dispatch = useDispatch();
@@ -23,9 +23,12 @@ export default function VideoLists() {
     }
   };
 
-  const getFilterUrl = () => {
+  const getFilterFavorite = () => {
     dispatch({ type: FILTER_VIDEO });
   };
+  const getFilterAll = () => {
+    dispatch({type: FILTER_VIDEO_ALL});
+  }
 
   return (
     <Container className="mt-5">
@@ -33,9 +36,9 @@ export default function VideoLists() {
       <UncontrolledDropdown>
         <DropdownToggle caret>Filtruj</DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Wszystkie</DropdownItem>
+          <DropdownItem onClick={() => getFilterAll()}>Wszystkie</DropdownItem>
           <DropdownItem divider />
-          <DropdownItem onClick={() => getFilterUrl()}>
+          <DropdownItem onClick={() => getFilterFavorite()}>
             Tylko ulubione
           </DropdownItem>
         </DropdownMenu>
