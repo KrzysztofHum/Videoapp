@@ -10,7 +10,13 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 import Paginations from "./Paginations";
-import { ALL_VIDEO_DELETE, FILTER_VIDEO, FILTER_VIDEO_ALL } from "../constants/videoConstants";
+import {
+  ALL_VIDEO_DELETE,
+  FILTER_VIDEO,
+  FILTER_VIDEO_ALL,
+  SORT_VIDEO_BY_LATEST,
+  SORT_VIDEO_BY_THE_OLDEST,
+} from "../constants/videoConstants";
 
 export default function VideoLists() {
   const dispatch = useDispatch();
@@ -27,8 +33,15 @@ export default function VideoLists() {
     dispatch({ type: FILTER_VIDEO });
   };
   const getFilterAll = () => {
-    dispatch({type: FILTER_VIDEO_ALL});
-  }
+    dispatch({ type: FILTER_VIDEO_ALL });
+  };
+
+  const sortByLatest = () => {
+    dispatch({ type: SORT_VIDEO_BY_LATEST });
+  };
+  const sortByTheOldest = () => {
+    dispatch({ type: SORT_VIDEO_BY_THE_OLDEST });
+  };
 
   return (
     <Container className="mt-5">
@@ -46,9 +59,13 @@ export default function VideoLists() {
       <UncontrolledDropdown>
         <DropdownToggle caret>Sortuj</DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Najstarsze</DropdownItem>
+          <DropdownItem onClick={() => sortByTheOldest()}>
+            Najstarsze
+          </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem>Ostatnio dodane</DropdownItem>
+          <DropdownItem onClick={() => sortByLatest()}>
+            Ostatnio dodane
+          </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
       <Paginations />
@@ -73,6 +90,7 @@ export default function VideoLists() {
                 video.snippet.thumbnails.default.url
               }
               favorite={video.favorite}
+              data={video.data}
             ></Video>
           ))}
         </Row>

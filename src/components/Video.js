@@ -17,6 +17,7 @@ export default function Video(props) {
   const likeCount = props.like;
   const img = props.img;
   const view = props.view;
+  const data = props.data;
   const deleteVideoHandler = (id) => {
     if (window.confirm("Na pewno chcesz usunąć film ?")) {
       dispatch(deleteVideo(id));
@@ -33,7 +34,7 @@ export default function Video(props) {
           <CardTitle tag="h5">{title}</CardTitle>
           <CardText>Polubienia: {likeCount}</CardText>
           <CardText>Wyświetlenia: {view > -1 ? view : "Brak Danych"}</CardText>
-          <CardText>Czas dodania: {new Date().toLocaleString() + ""}</CardText>
+          <CardText>Czas dodania: {data}</CardText>
         </CardBody>
         <Col className="d-flex justify-content-around">
           <Button ml="5">Obejrzyj</Button>

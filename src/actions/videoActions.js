@@ -19,7 +19,12 @@ export const addVimeoVideo = (link) => async (dispatch) => {
     });
     dispatch({
       type: VIDEO_ADD_SUCCESS,
-      payload: { ...data, id: uuidv4(), favorite: "no" },
+      payload: {
+        ...data,
+        id: uuidv4(),
+        favorite: "no",
+        data: new Date().toLocaleString() + "",
+      },
     });
   } catch (error) {
     dispatch({ type: VIDEO_ADD_FAIL, payload: error.message });
@@ -32,7 +37,12 @@ export const addYoutubeVideo = (link) => async (dispatch) => {
     if (data.items.toString().length > 1)
       return dispatch({
         type: VIDEO_ADD_SUCCESS,
-        payload: { ...data.items[0], id: uuidv4(), favorite: "no" },
+        payload: {
+          ...data.items[0],
+          id: uuidv4(),
+          favorite: "no",
+          data: new Date().toLocaleString() + "",
+        },
       });
     return dispatch({ type: VIDEO_ADD_FAIL });
   } catch (error) {

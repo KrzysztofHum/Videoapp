@@ -3,6 +3,8 @@ import {
   ALL_VIDEO_DELETE,
   FILTER_VIDEO,
   FILTER_VIDEO_ALL,
+  SORT_VIDEO_BY_LATEST,
+  SORT_VIDEO_BY_THE_OLDEST,
   VIDEO_ADD_FAIL,
   VIDEO_ADD_REQUEST,
   VIDEO_ADD_SUCCESS,
@@ -61,6 +63,20 @@ export const videoReducer = (state = { videos: [] }, action) => {
     case FILTER_VIDEO_ALL:
       let allVideos = JSON.parse(localStorage.getItem("videos"));
       return { videos: allVideos };
+    case SORT_VIDEO_BY_THE_OLDEST:
+      const theOldestSort = state.videos.slice().sort(function (a, b) {
+        let arrA = a.data.replace(/[^0-9]/g, "");
+        let arrB = b.data.replace(/[^0-9]/g, "");
+        return arrA - arrB;
+      });
+      return { videos: theOldestSort };
+    case SORT_VIDEO_BY_LATEST:
+      const latestSort = state.videos.slice().sort(function (a, b) {
+        let arrA = a.data.replace(/[^0-9]/g, "");
+        let arrB = b.data.replace(/[^0-9]/g, "");
+        return arrB - arrA;
+      });
+      return { videos: latestSort };
     default:
       return state;
   }
