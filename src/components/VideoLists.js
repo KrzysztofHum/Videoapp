@@ -97,24 +97,7 @@ export default function VideoLists() {
 
       <Row className="mb-5">
         {currentVideos.map((video) => (
-          <Video
-            key={video.idd}
-            idd={video.idd}
-            title={video.name ?? video.snippet.localized.title}
-            like={
-              video.metadata?.connections?.likes?.total ??
-              video.statistics.likeCount
-            }
-            view={video.pictures ?? video.statistics.viewCount}
-            img={
-              video.pictures?.sizes[2]?.link ??
-              video.snippet.thumbnails.default.url
-            }
-            favorite={video.favorite}
-            data={video.data}
-            link={video.link ?? `https://www.youtube.com/watch?v=${video.id}`}
-            modal={video.modal}
-          ></Video>
+          <Video video={video} key={video.idd}></Video>
         ))}
       </Row>
       <Paginations

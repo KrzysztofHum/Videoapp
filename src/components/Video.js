@@ -12,10 +12,19 @@ import {
 } from "reactstrap";
 import { addVideoToFavorite, deleteVideo } from "../actions/videoActions";
 
-export default function Video(props) {
+export default function Video({ video }) {
   const dispatch = useDispatch();
-  const { link, title, likeCount, img, view, data, modal } = props;
-  console.log(modal);
+
+  const idd = video.idd;
+  const title = video.name ?? video.snippet.localized.title;
+  const likeCount =
+    video.metadata?.connections?.likes?.total ?? video.statistics.likeCount;
+  const view = video.pictures ?? video.statistics.viewCount;
+  const img =
+    video.pictures?.sizes[2]?.link ?? video.snippet.thumbnails.default.url;
+  const data = video.data;
+  const link = video.link ?? `https://www.youtube.com/watch?v=${video.id}`;
+  const modal = video.modal;
 
   const [isOpen, setIsOpen] = useState(false);
   const [iframeSrc, setIframeSrc] = useState("");
@@ -39,13 +48,6 @@ export default function Video(props) {
   return (
     <>
       <Modal isOpen={isOpen} toggle={toggle}>
-        {/* <ModalVideo
-          channel="youtube"
-          autoplay
-          isOpen={isOpen}
-          videoId="QBWuo9_O15I"
-          onClose={() => setOpen(false)}
-        /> */}
         <iframe
           width="560"
           height="315"
@@ -63,7 +65,7 @@ export default function Video(props) {
             height="400px"
             src={img}
             alt={title}
-            onClick={() => modalHandler(props.modal)}
+            onClick={() => modalHandler(modal)}
           />
           <CardBody>
             <CardTitle tag="h5">{title}</CardTitle>
@@ -79,8 +81,8 @@ export default function Video(props) {
                 Obejrzyj
               </a>
             </Button>
-            <Button onClick={() => deleteVideoHandler(props.idd)}>Usuń</Button>
-            <Button onClick={() => addVideoToFavoriteHandler(props.idd)}>
+            <Button onClick={() => deleteVideoHandler(idd)}>Usuń</Button>
+            <Button onClick={() => addVideoToFavoriteHandler(idd)}>
               Dodaj do ulubionych
             </Button>
           </Col>

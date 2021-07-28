@@ -6,7 +6,6 @@ export default function Paginations({ videos, setCurrentPage, videosPerPage }) {
   for (let i = 1; i <= Math.ceil(videos.length / videosPerPage); i++) {
     pageNumbers.push(i);
   }
-  console.log(videos);
   const currentPageHandler = (e) => {
     setCurrentPage(e.target.id);
   };
