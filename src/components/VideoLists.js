@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Video from "./Video";
+import Paginations from "./Paginations";
 import {
   Alert,
   Button,
@@ -11,8 +12,6 @@ import {
   Row,
   UncontrolledDropdown,
 } from "reactstrap";
-
-import Paginations from "./Paginations";
 import {
   ALL_VIDEO_DELETE,
   FILTER_VIDEO,
@@ -20,11 +19,20 @@ import {
   SORT_VIDEO_BY_LATEST,
   SORT_VIDEO_BY_THE_OLDEST,
 } from "../constants/videoConstants";
+import { useState } from "react";
 
 export default function VideoLists() {
   const dispatch = useDispatch();
   const video = useSelector((state) => state.video);
   const { error, videos } = video;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const videosPerPage = 3;
+
+  const indexOfLastVideo = currentPage * videosPerPage;
+  const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
+  const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+
   const deleteAllVideoHandler = () => {
     if (window.confirm("Na pewno chcesz usunąć wszystkie filmy ?")) {
       dispatch({ type: ALL_VIDEO_DELETE });
@@ -88,7 +96,7 @@ export default function VideoLists() {
       ) : null}
 
       <Row className="mb-5">
-        {videos.map((video) => (
+        {currentVideos.map((video) => (
           <Video
             key={video.idd}
             idd={video.idd}
@@ -109,8 +117,11 @@ export default function VideoLists() {
           ></Video>
         ))}
       </Row>
-
-      <Paginations className="mt-5" />
+      <Paginations
+        setCurrentPage={setCurrentPage}
+        videos={videos}
+        videosPerPage={videosPerPage}
+      />
     </Container>
   );
 }
