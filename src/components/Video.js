@@ -40,29 +40,33 @@ export default function Video({ video, setIsOpen, setIframeSrc, isOpen }) {
   };
 
   return (
-    <Col sm="12" md="12" lg="6" xl="6">
-      <Card className="mt-3">
-        <CardImg
-          width="100%"
-          height="400px"
-          src={img}
-          alt={title}
-          onClick={() => modalHandler(modal)}
-        />
-        <CardBody>
-          <CardTitle tag="h5">{title}</CardTitle>
+    <Col sm="12" md="12" lg="12" xl="12">
+      <Card className="mt-3 d-flex flex-row ">
+        <CardImg src={img} alt={title} onClick={() => modalHandler(modal)} />
+        <CardBody className="d-flex flex-column justify-content-around">
+          <CardTitle tag="h4">{title}</CardTitle>
           <CardText>Polubienia: {likeCount}</CardText>
           <CardText>Wyświetlenia: {view > -1 ? view : "Brak Danych"}</CardText>
           <CardText>Czas dodania: {data}</CardText>
         </CardBody>
-        <Col className="d-flex justify-content-around p-4">
-          <Button ml="5">
-            <a aria-label="link" rel="noreferrer" target="_blank" href={link}>
+        <Col className=" p-4 d-flex flex-column justify-content-around">
+            <a
+              className="btn btn-success"
+              aria-label="link"
+              rel="noreferrer"
+              target="_blank"
+              href={link}
+            >
               Obejrzyj
             </a>
+
+          <Button color="danger" onClick={() => deleteVideoHandler(idd)}>
+            Usuń
           </Button>
-          <Button onClick={() => deleteVideoHandler(idd)}>Usuń</Button>
-          <Button onClick={() => addVideoToFavoriteHandler(idd)}>
+          <Button
+            color="primary"
+            onClick={() => addVideoToFavoriteHandler(idd)}
+          >
             Dodaj do ulubionych
           </Button>
         </Col>

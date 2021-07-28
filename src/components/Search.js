@@ -74,7 +74,7 @@ export default function Search() {
           <Button color="primary" onClick={() => addVideoHandler()}>
             Pokaż Film!
           </Button>
-          <Button color="primary" onClick={() => addTypescriptVideoHandler()}>
+          <Button color="success" onClick={() => addTypescriptVideoHandler()}>
             Dodaj 5 filmów o TypeScript
           </Button>
         </InputGroupAddon>

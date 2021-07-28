@@ -10,7 +10,10 @@ export default function Paginations({ videos, setCurrentPage, videosPerPage }) {
     setCurrentPage(e.target.id);
   };
   return (
-    <Pagination aria-label="videos navigation">
+    <Pagination
+      className="d-flex justify-content-center"
+      aria-label="videos navigation"
+    >
       {pageNumbers.map((number) => (
         <PaginationItem key={number}>
           <PaginationLink id={number} onClick={currentPageHandler}>

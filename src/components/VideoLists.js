@@ -62,11 +62,15 @@ export default function VideoLists() {
     <Container className="mt-5">
       <Row className="p-3">
         <Col>
-          <Button onClick={() => deleteAllVideoHandler()}>Usuń Wszystko</Button>
+          <Button color="danger" onClick={() => deleteAllVideoHandler()}>
+            Usuń Wszystko
+          </Button>
         </Col>
         <Col>
           <UncontrolledDropdown>
-            <DropdownToggle caret>Filtruj</DropdownToggle>
+            <DropdownToggle color="info" caret>
+              Filtruj
+            </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={() => getFilterAll()}>
                 Wszystkie
@@ -80,7 +84,9 @@ export default function VideoLists() {
         </Col>
         <Col>
           <UncontrolledDropdown>
-            <DropdownToggle caret>Sortuj</DropdownToggle>
+            <DropdownToggle color="info" caret>
+              Sortuj
+            </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={() => sortByTheOldest()}>
                 Najstarsze
