@@ -1,4 +1,4 @@
-export const VIDEO_ADD_REQUEST = "VIDEO_ADD_REQUEST";
+
 export const VIDEO_ADD_SUCCESS = "VIDEO_ADD_SUCCESS";
 export const VIDEO_ADD_FAIL = "VIDEO_ADD_FAIL";
 export const VIDEO_DELETE = "VIDEO_DELETE";

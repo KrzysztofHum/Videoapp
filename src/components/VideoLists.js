@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Video from "./Video";
 import {
+  Alert,
   Button,
   Col,
   Container,
@@ -23,7 +24,7 @@ import {
 export default function VideoLists() {
   const dispatch = useDispatch();
   const video = useSelector((state) => state.video);
-  const { loading, error, videos } = video;
+  const { error, videos } = video;
   const deleteAllVideoHandler = () => {
     if (window.confirm("Na pewno chcesz usunąć wszystkie filmy ?")) {
       dispatch({ type: ALL_VIDEO_DELETE });
@@ -79,35 +80,36 @@ export default function VideoLists() {
           </UncontrolledDropdown>
         </Col>
       </Row>
+      {error ? (
+        <Alert color="danger">
+          Ten link nie prowadzi do zadnego video na YouTube/Vimeo. Proszę
+          sprawdz poprawność.
+        </Alert>
+      ) : null}
 
-      {loading ? (
-        <div>Ładowanie</div>
-      ) : error ? (
-        <div>{error}</div>
-      ) : (
-        <Row className="mb-5">
-          {videos.map((video) => (
-            <Video
-              key={video.idd}
-              idd={video.idd}
-              title={video.name ?? video.snippet.localized.title}
-              like={
-                video.metadata?.connections?.likes?.total ??
-                video.statistics.likeCount
-              }
-              view={video.pictures ?? video.statistics.viewCount}
-              img={
-                video.pictures?.sizes[2]?.link ??
-                video.snippet.thumbnails.default.url
-              }
-              favorite={video.favorite}
-              data={video.data}
-              link={video.link ?? `https://www.youtube.com/watch?v=${video.id}`}
-              modal={video.modal}
-            ></Video>
-          ))}
-        </Row>
-      )}
+      <Row className="mb-5">
+        {videos.map((video) => (
+          <Video
+            key={video.idd}
+            idd={video.idd}
+            title={video.name ?? video.snippet.localized.title}
+            like={
+              video.metadata?.connections?.likes?.total ??
+              video.statistics.likeCount
+            }
+            view={video.pictures ?? video.statistics.viewCount}
+            img={
+              video.pictures?.sizes[2]?.link ??
+              video.snippet.thumbnails.default.url
+            }
+            favorite={video.favorite}
+            data={video.data}
+            link={video.link ?? `https://www.youtube.com/watch?v=${video.id}`}
+            modal={video.modal}
+          ></Video>
+        ))}
+      </Row>
+
       <Paginations className="mt-5" />
     </Container>
   );

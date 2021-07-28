@@ -51,9 +51,9 @@ export default function Video(props) {
           height="315"
           src={iframeSrc}
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </Modal>
       <Col sm="12" md="12" lg="6" xl="4">
