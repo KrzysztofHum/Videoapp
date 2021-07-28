@@ -9,6 +9,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  Modal,
   Row,
   UncontrolledDropdown,
 } from "reactstrap";
@@ -26,8 +27,12 @@ export default function VideoLists() {
   const video = useSelector((state) => state.video);
   const { error, videos } = video;
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [iframeSrc, setIframeSrc] = useState("");
+  const toggle = () => setIsOpen(!isOpen);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const videosPerPage = 3;
+  const videosPerPage = 2;
 
   const indexOfLastVideo = currentPage * videosPerPage;
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
@@ -96,8 +101,25 @@ export default function VideoLists() {
       ) : null}
 
       <Row className="mb-5">
+        <Modal isOpen={isOpen} toggle={toggle}>
+          <iframe
+            width="560"
+            height="315"
+            src={iframeSrc}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </Modal>
         {currentVideos.map((video) => (
-          <Video video={video} key={video.idd}></Video>
+          <Video
+            video={video}
+            key={video.idd}
+            setIsOpen={setIsOpen}
+            setIframeSrc={setIframeSrc}
+            isOpen={isOpen}
+          ></Video>
         ))}
       </Row>
       <Paginations
