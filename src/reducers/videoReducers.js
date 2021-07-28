@@ -28,12 +28,12 @@ export const videoReducer = (state = { videos: [] }, action) => {
     case VIDEO_DELETE:
       const newVideos = {
         ...state,
-        videos: state.videos.filter((video) => video.id !== action.payload),
+        videos: state.videos.filter((video) => video.idd !== action.payload),
       };
       localStorage.setItem("videos", JSON.stringify(newVideos.videos));
       return {
         ...state,
-        videos: state.videos.filter((video) => video.id !== action.payload),
+        videos: state.videos.filter((video) => video.idd !== action.payload),
       };
     case ALL_VIDEO_DELETE:
       localStorage.setItem("videos", JSON.stringify([]));
@@ -43,11 +43,11 @@ export const videoReducer = (state = { videos: [] }, action) => {
     case ADD_VIDEO_TO_FAVORITE:
       const findVideo = {
         ...state,
-        videos: state.videos.filter((video) => video.id === action.payload),
+        videos: state.videos.filter((video) => video.idd === action.payload),
       };
       const otherVideos = {
         ...state,
-        videos: state.videos.filter((video) => video.id !== action.payload),
+        videos: state.videos.filter((video) => video.idd !== action.payload),
       };
       const favoriteVideo = { ...findVideo.videos[0], favorite: "yes" };
       const videos = [...otherVideos.videos, favoriteVideo];

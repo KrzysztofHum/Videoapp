@@ -11,26 +11,26 @@ import {
 
 export default function Search() {
   const dispatch = useDispatch("");
-  const [id, setId] = useState("");
+  const [idd, setIdd] = useState("");
 
   const addVideoHandler = () => {
-    if (id.includes("vimeo.com/")) return vimeoVideo();
+    if (idd.includes("vimeo.com/")) return vimeoVideo();
     return youtubeVideo();
   };
 
   const vimeoVideo = () => {
-    const idUrlv = id.match(/[^vimeo.com/]*$/);
+    const idUrlv = idd.match(/[^vimeo.com/]*$/);
     const vimeoApi = `https://api.vimeo.com/videos/${idUrlv}`;
-    dispatch(addVimeoVideo(vimeoApi));
-    setId("");
+    dispatch(addVimeoVideo(vimeoApi, idUrlv));
+    setIdd("");
   };
 
   const youtubeVideo = () => {
-    const idUrl = id.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/);
+    const idUrl = idd.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/);
     const api = process.env.REACT_APP_API_KEY;
-    const youtubeApi = `https://www.googleapis.com/youtube/v3/videos?id=${idUrl}&key=${api}&part=snippet,contentDetails,statistics,status`;
+    const youtubeApi = `https://www.googleapis.com/youtube/v3/videos?id=${idUrl}&key=${api}&part=snippet,statistics,id`;
     dispatch(addYoutubeVideo(youtubeApi));
-    setId("");
+    setIdd("");
   };
 
   useEffect(() => {
@@ -50,11 +50,11 @@ export default function Search() {
       <InputGroup>
         <Input
           id="video"
-          value={id}
+          value={idd}
           name=""
           type="text"
           placeholder="wklej id"
-          onChange={(e) => setId(e.target.value)}
+          onChange={(e) => setIdd(e.target.value)}
         />
         <InputGroupAddon addonType="append">
           <Button color="primary" onClick={() => addVideoHandler()}>

@@ -8,7 +8,7 @@ import {
   VIDEO_DELETE,
 } from "../constants/videoConstants";
 
-export const addVimeoVideo = (link) => async (dispatch) => {
+export const addVimeoVideo = (link, id) => async (dispatch) => {
   dispatch({ type: VIDEO_ADD_REQUEST });
   try {
     const token = process.env.REACT_APP_VIMEO_KEY;
@@ -21,7 +21,8 @@ export const addVimeoVideo = (link) => async (dispatch) => {
       type: VIDEO_ADD_SUCCESS,
       payload: {
         ...data,
-        id: uuidv4(),
+        idd: uuidv4(),
+        modal: `https://player.vimeo.com/video/${id}`,
         favorite: "no",
         data: new Date().toLocaleString() + "",
       },
@@ -39,7 +40,8 @@ export const addYoutubeVideo = (link) => async (dispatch) => {
         type: VIDEO_ADD_SUCCESS,
         payload: {
           ...data.items[0],
-          id: uuidv4(),
+          modal: `https://www.youtube.com/embed/${data.items[0].id}`,
+          idd: uuidv4(),
           favorite: "no",
           data: new Date().toLocaleString() + "",
         },
@@ -50,10 +52,10 @@ export const addYoutubeVideo = (link) => async (dispatch) => {
   }
 };
 
-export const deleteVideo = (id) => (dispatch) => {
-  dispatch({ type: VIDEO_DELETE, payload: id });
+export const deleteVideo = (idd) => (dispatch) => {
+  dispatch({ type: VIDEO_DELETE, payload: idd });
 };
 
-export const addVideoToFavorite = (id) => (dispatch) => {
-  dispatch({ type: ADD_VIDEO_TO_FAVORITE, payload: id });
+export const addVideoToFavorite = (idd) => (dispatch) => {
+  dispatch({ type: ADD_VIDEO_TO_FAVORITE, payload: idd });
 };

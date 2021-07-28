@@ -5,9 +5,6 @@ export default function Paginations() {
   return (
     <Pagination size="lg" aria-label="Page navigation example">
       <PaginationItem>
-        <PaginationLink first href="#" />
-      </PaginationItem>
-      <PaginationItem>
         <PaginationLink previous href="#" />
       </PaginationItem>
       <PaginationItem>
@@ -21,9 +18,6 @@ export default function Paginations() {
       </PaginationItem>
       <PaginationItem>
         <PaginationLink next href="#" />
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink last href="#" />
       </PaginationItem>
     </Pagination>
   );
