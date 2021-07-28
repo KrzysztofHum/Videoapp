@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addVimeoVideo, addYoutubeVideo } from "../actions/videoActions";
 import {
   InputGroup,
@@ -11,6 +11,9 @@ import {
 
 export default function Search() {
   const dispatch = useDispatch("");
+  const video = useSelector((state) => state.video);
+  const { typescriptVideos } = video;
+
   const [idd, setIdd] = useState("");
 
   const addVideoHandler = () => {
@@ -31,6 +34,17 @@ export default function Search() {
     const youtubeApi = `https://www.googleapis.com/youtube/v3/videos?id=${idUrl}&key=${api}&part=snippet,statistics,id`;
     dispatch(addYoutubeVideo(youtubeApi));
     setIdd("");
+  };
+
+  const addTypescriptVideoHandler = () => {
+    const api = process.env.REACT_APP_API_KEY;
+    typescriptVideos.map((video) =>
+      dispatch(
+        addYoutubeVideo(
+          `https://www.googleapis.com/youtube/v3/videos?id=${video}&key=${api}&part=snippet,statistics,id`
+        )
+      )
+    );
   };
 
   useEffect(() => {
@@ -59,6 +73,9 @@ export default function Search() {
         <InputGroupAddon addonType="append">
           <Button color="primary" onClick={() => addVideoHandler()}>
             Pokaż Film!
+          </Button>
+          <Button color="primary" onClick={() => addTypescriptVideoHandler()}>
+            Dodaj 5 filmów o TypeScript
           </Button>
         </InputGroupAddon>
       </InputGroup>

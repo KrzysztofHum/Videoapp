@@ -7,6 +7,13 @@ const initialState = {
     videos: localStorage.getItem("videos")
       ? JSON.parse(localStorage.getItem("videos"))
       : [],
+    typescriptVideos: [
+      "ydkQlJhodio",
+      "BwuLxPH8IDs",
+      "Z5iWr6Srsj8",
+      "NjN00cM18Z4",
+      "RnTU81aQMRA",
+    ],
   },
 };
 
