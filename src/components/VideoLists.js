@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
+import { FaList, FaThLarge } from "react-icons/fa";
+
 import Video from "./Video";
 import Paginations from "./Paginations";
 import {
@@ -68,7 +70,7 @@ export default function VideoLists() {
         </Col>
         <Col>
           <UncontrolledDropdown>
-            <DropdownToggle color="info" caret>
+            <DropdownToggle color="light" caret>
               Filtruj
             </DropdownToggle>
             <DropdownMenu>
@@ -84,7 +86,7 @@ export default function VideoLists() {
         </Col>
         <Col>
           <UncontrolledDropdown>
-            <DropdownToggle color="info" caret>
+            <DropdownToggle color="light" caret>
               Sortuj
             </DropdownToggle>
             <DropdownMenu>
@@ -99,6 +101,18 @@ export default function VideoLists() {
           </UncontrolledDropdown>
         </Col>
       </Row>
+        <Col className="d-flex flex-row-reverse">
+          <UncontrolledDropdown>
+            <DropdownToggle color="primary">
+              <FaList />
+              <FaThLarge />
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>Lista</DropdownItem>
+              <DropdownItem>Kafelki</DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        </Col>
       {error ? (
         <Alert color="danger">
           Ten link nie prowadzi do zadnego video na YouTube/Vimeo. Proszę

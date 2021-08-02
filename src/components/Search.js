@@ -59,9 +59,8 @@ export default function Search() {
 
   return (
     <Container className="mt-5">
-      <h2>Wyszukiwarka filmów</h2>
-      <h5>Wklej link z youtube:</h5>
-      <InputGroup>
+      <h2 className="text-center mb-3">Wklej link z youtube lub vimeo:</h2>
+      <InputGroup className="input">
         <Input
           id="video"
           value={idd}
@@ -71,14 +70,16 @@ export default function Search() {
           onChange={(e) => setIdd(e.target.value)}
         />
         <InputGroupAddon addonType="append">
-          <Button color="primary" onClick={() => addVideoHandler()}>
-            Pokaż Film!
-          </Button>
-          <Button color="success" onClick={() => addTypescriptVideoHandler()}>
-            Dodaj 5 filmów o TypeScript
+          <Button color="warning" onClick={() => addVideoHandler()}>
+            Dodaj Film!
           </Button>
         </InputGroupAddon>
       </InputGroup>
+      <InputGroupAddon addonType="append" className="input">
+        <Button color="success" onClick={() => addTypescriptVideoHandler()}>
+          Dodaj 5 filmów o TypeScript
+        </Button>
+      </InputGroupAddon>
     </Container>
   );
 }

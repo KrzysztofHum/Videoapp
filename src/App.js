@@ -5,8 +5,9 @@ import { Container, Row } from "reactstrap";
 
 function App() {
   return (
-    <Container>
+    <Container className="bg-light">
       <Row>
+        <h1 className="text-center mt-5 ">Wyszukiwarka filmów</h1>
         <Search />
         <VideoLists />
       </Row>
