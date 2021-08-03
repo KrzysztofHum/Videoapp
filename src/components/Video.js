@@ -8,11 +8,16 @@ import {
   CardTitle,
   Col,
   Button,
-
 } from "reactstrap";
 import { addVideoToFavorite, deleteVideo } from "../actions/videoActions";
 
-export default function Video({ video, setIsOpen, setIframeSrc, isOpen }) {
+export default function Video({
+  video,
+  setIsOpen,
+  setIframeSrc,
+  isOpen,
+  layout,
+}) {
   const dispatch = useDispatch();
 
   const idd = video.idd;
@@ -41,41 +46,55 @@ export default function Video({ video, setIsOpen, setIframeSrc, isOpen }) {
   };
 
   return (
+    <Col sm="12" md="12" lg="12" xl="12">
+      <Card
+        className={
+          layout
+            ? "mt-5 wrapper"
+            : "mt-5 d-flex flex-row layout justify-content-center"
+        }
+      >
+        <CardImg src={img} alt={title} onClick={() => modalHandler(modal)} />
+        <CardBody
+          className={
+            layout
+              ? "d-flex flex-column justify-content-around"
+              : "col-6 d-flex flex-column justify-content-around card-body"
+          }
+        >
+          <CardTitle tag="h3">{title}</CardTitle>
+          <CardText>Polubienia: {likeCount}</CardText>
+          <CardText>Wyświetlenia: {view > -1 ? view : "Brak Danych"}</CardText>
+          <CardText>Czas dodania: {data}</CardText>
+        </CardBody>
+        <Col
+          className={
+            layout
+              ? "p-4 d-flex justify-content-around"
+              : "col-lg-2 col-md-2 col-sm-3 col-6 p-2 d-flex flex-column justify-content-around card-actions"
+          }
+        >
+          <a
+            className="btn btn-success"
+            aria-label="link"
+            rel="noreferrer"
+            target="_blank"
+            href={link}
+          >
+            Obejrzyj
+          </a>
 
-      
-      <Col sm="12" md="12" lg="12" xl="12">
-        <Card className="mt-5 wrapper" >
-          <CardImg src={img} alt={title} onClick={() => modalHandler(modal)} />
-          <CardBody className="d-flex flex-column justify-content-around">
-            <CardTitle tag="h4">{title}</CardTitle>
-            <CardText>Polubienia: {likeCount}</CardText>
-            <CardText>
-              Wyświetlenia: {view > -1 ? view : "Brak Danych"}
-            </CardText>
-            <CardText>Czas dodania: {data}</CardText>
-          </CardBody>
-          <Col className="p-4 d-flex justify-content-around">
-            <a
-              className="btn btn-success"
-              aria-label="link"
-              rel="noreferrer"
-              target="_blank"
-              href={link}
-            >
-              Obejrzyj
-            </a>
-
-            <Button color="danger" onClick={() => deleteVideoHandler(idd)}>
-              Usuń
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => addVideoToFavoriteHandler(idd)}
-            >
-              Ulubione
-            </Button>
-          </Col>
-        </Card>
-      </Col>
+          <Button color="danger" onClick={() => deleteVideoHandler(idd)}>
+            Usuń
+          </Button>
+          <Button
+            color="primary"
+            onClick={() => addVideoToFavoriteHandler(idd)}
+          >
+            Ulubione
+          </Button>
+        </Col>
+      </Card>
+    </Col>
   );
 }

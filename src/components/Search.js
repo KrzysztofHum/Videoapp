@@ -37,6 +37,7 @@ export default function Search() {
   };
 
   const addTypescriptVideoHandler = () => {
+    console.log(typescriptVideos);
     const api = process.env.REACT_APP_API_KEY;
     typescriptVideos.map((video) =>
       dispatch(
@@ -66,7 +67,7 @@ export default function Search() {
           value={idd}
           name=""
           type="text"
-          placeholder="wklej id"
+          placeholder="Tutaj wklejamy link"
           onChange={(e) => setIdd(e.target.value)}
         />
         <InputGroupAddon addonType="append">
@@ -75,11 +76,15 @@ export default function Search() {
           </Button>
         </InputGroupAddon>
       </InputGroup>
-      <InputGroupAddon addonType="append" className="input">
-        <Button color="success" onClick={() => addTypescriptVideoHandler()}>
-          Dodaj 5 filmów o TypeScript
-        </Button>
-      </InputGroupAddon>
+      {typescriptVideos ? (
+        <InputGroupAddon addonType="append" className="input text-center mt-2">
+          <Button color="success" onClick={() => addTypescriptVideoHandler()}>
+            Dodaj 5 filmów o TypeScript
+          </Button>
+        </InputGroupAddon>
+      ) : (
+        ""
+      )}
     </Container>
   );
 }

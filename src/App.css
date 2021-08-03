@@ -1,9 +1,32 @@
 .input {
-	max-width: 20rem;
-	margin: 0 auto;
+  max-width: 30rem;
+  margin: 0 auto;
 }
 
 .wrapper {
-	max-width: 40rem;
-	margin: 0 auto;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .layout {
+    font-size: 12px;
+	flex-wrap: wrap;
+  }
+  .layout h3 {
+    font-size: 1rem;
+  }
+  .layout img {
+    max-width: 100px;
+  }
+  .layout p {
+    margin-bottom: 8px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .card-body {
+    padding: 8px;
+  }
 }

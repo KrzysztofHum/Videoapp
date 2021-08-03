@@ -29,6 +29,7 @@ export default function VideoLists() {
   const video = useSelector((state) => state.video);
   const { error, videos } = video;
 
+  const [layout, setLayout] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [iframeSrc, setIframeSrc] = useState("");
   const toggle = () => setIsOpen(!isOpen);
@@ -62,57 +63,62 @@ export default function VideoLists() {
 
   return (
     <Container className="mt-5">
-      <Row className="p-3">
-        <Col>
-          <Button color="danger" onClick={() => deleteAllVideoHandler()}>
-            Usuń Wszystko
+      {currentVideos.length >= 1 ? (
+        <>
+        <Row className="p-3">
+          <Col className="col-12 col-sm-4 text-center">
+            <Button color="danger" onClick={() => deleteAllVideoHandler()}>
+              Usuń Wszystko
+            </Button>
+          </Col>
+          <Col className="col-6 col-sm-4 text-center">
+            <UncontrolledDropdown>
+              <DropdownToggle color="light" caret>
+                Filtruj
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => getFilterAll()}>
+                  Wszystkie
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => getFilterFavorite()}>
+                  Tylko ulubione
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Col>
+          <Col className="col-6 col-sm-4 text-center">
+            <UncontrolledDropdown>
+              <DropdownToggle color="light" caret>
+                Sortuj
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => sortByTheOldest()}>
+                  Najstarsze
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => sortByLatest()}>
+                  Ostatnio dodane
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Col>
+        </Row>
+      <Col className="d-flex flex-row-reverse">
+        {layout ? (
+          <Button color="primary" onClick={() => setLayout(!layout)}>
+            <FaThLarge />
           </Button>
-        </Col>
-        <Col>
-          <UncontrolledDropdown>
-            <DropdownToggle color="light" caret>
-              Filtruj
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={() => getFilterAll()}>
-                Wszystkie
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem onClick={() => getFilterFavorite()}>
-                Tylko ulubione
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Col>
-        <Col>
-          <UncontrolledDropdown>
-            <DropdownToggle color="light" caret>
-              Sortuj
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={() => sortByTheOldest()}>
-                Najstarsze
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem onClick={() => sortByLatest()}>
-                Ostatnio dodane
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Col>
-      </Row>
-        <Col className="d-flex flex-row-reverse">
-          <UncontrolledDropdown>
-            <DropdownToggle color="primary">
-              <FaList />
-              <FaThLarge />
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Lista</DropdownItem>
-              <DropdownItem>Kafelki</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Col>
+        ) : (
+          <Button color="primary" onClick={() => setLayout(!layout)}>
+            <FaList />
+          </Button>
+        )}
+      </Col>
+      </>
+      ) : (
+        ""
+      )}
       {error ? (
         <Alert color="danger">
           Ten link nie prowadzi do zadnego video na YouTube/Vimeo. Proszę
@@ -134,6 +140,7 @@ export default function VideoLists() {
         </Modal>
         {currentVideos.map((video) => (
           <Video
+            layout={layout}
             video={video}
             key={video.idd}
             setIsOpen={setIsOpen}
